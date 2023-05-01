@@ -13,3 +13,7 @@
   z-index: 999;
   background-color: gray;
 }
+.form-btn{
+   width: 250px !important;
+   margin-top:25px !important;
+}
