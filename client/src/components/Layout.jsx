@@ -16,16 +16,38 @@ export const Layout = ({ children }) => {
     message.success("Logout Successfully!");
     navigate("/login");
   };
-
+  // Docter Menu
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "fa-solid fa-house fa-beat",
+    },
+    {
+      name: "Appointment",
+      path: "/appointment",
+      icon: "fa-solid fa-list fa-beat",
+    },
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "fa-sharp fa-solid fa-user-tie fa-beat",
+    },
+  ];
   //Menu list
-  const sidebarMenu = user?.isAdmin ? adminMenu : userMenu;
+  const sidebarMenu = user?.isAdmin
+    ? adminMenu
+    : user?.isDoctor
+    ? doctorMenu
+    : userMenu;
+
   return (
     <>
       <div className="main">
         <div className="layout">
           <div className="sidebar">
             <div className="logo">
-              <h6>Docter Appointment</h6>
+              <h6>Doctor Appointment</h6>
             </div>
             <hr />
             <div className="menu">
@@ -50,8 +72,11 @@ export const Layout = ({ children }) => {
           </div>
           <div className="content">
             <div className="header">
-              <div className="header-content">
-                <Badge count={user && user.notification.length}>
+              <div className="header-content" style={{ cursor: "pointer" }}>
+                <Badge
+                  count={user?.notification.length}
+                  onClick={() => navigate("/notification")}
+                >
                   <i className="fa-solid fa-bell fa-beat"></i>
                 </Badge>
 

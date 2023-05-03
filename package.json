@@ -1,9 +1,9 @@
 {
-  "name": "Doc-Appoinment-system",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -15,6 +15,7 @@
   "author": "techinfyt ",
   "license": "MIT",
   "dependencies": {
+    "@emotion/styled": "^11.10.8",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^7.6.0",

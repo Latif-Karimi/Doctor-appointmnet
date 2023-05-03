@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import {HomePage} from "./pages/HomePage";
+import {Login} from "./pages/Login";
+import {Register} from "./pages/Register";
 import { useSelector } from "react-redux";
 import { Spinner } from "./components/Spinner";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicRoute } from "./components/PublicRoute";
 import { ApplyDoctor } from "./pages/ApplyDoctor";
+import { Notification } from "./pages/Notification";
+import { User } from "./pages/admin/User";
+import {Doctor} from "./pages/admin/Doctor"
+import {Profile} from "./pages/doctor/Profile"
 
 export const App = () => {
   const { loading } = useSelector((state) => state.alerts);
@@ -30,6 +34,38 @@ export const App = () => {
               element={
                 <ProtectedRoute>
                   <ApplyDoctor />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/doctors"
+              element={
+                <ProtectedRoute>
+                  < Doctor/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/doctor/profile/:id"
+              element={
+                <ProtectedRoute>
+                  < Profile/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notification"
+              element={
+                <ProtectedRoute>
+                  <Notification />
                 </ProtectedRoute>
               }
             />
