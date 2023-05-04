@@ -143,7 +143,6 @@ export const ApplyDoctor = () => {
               <TimePicker.RangePicker format="HH:mm"/>
             </Form.Item>
           </Col>
-          <Col xs={24} md={24} lg={8}></Col>
           <Col xs={24} md={24} lg={8}>
           <button className="btn btn-primary form-btn" type="submit">Submite</button>
           </Col>

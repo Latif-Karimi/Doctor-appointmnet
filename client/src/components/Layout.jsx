@@ -25,7 +25,7 @@ export const Layout = ({ children }) => {
     },
     {
       name: "Appointment",
-      path: "/appointment",
+      path: "/doctor-appointments",
       icon: "fa-solid fa-list fa-beat",
     },
     {
