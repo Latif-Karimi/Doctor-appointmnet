@@ -13,7 +13,7 @@ export const registerController = async (req, res) => {
     if (exisitingUser) {
       return res
         .status(200)
-        .send({ message: "User Already Exist", success: false });
+        .send({ message: "User Already Exist, Please login!", success: false });
     }
     const password = req.body.password;
     const salt = await bcrypt.genSalt(10);
@@ -38,7 +38,7 @@ export const loginController = async (req, res) => {
     if (!user) {
       return res
         .status(200)
-        .send({ message: "user not found", success: false });
+        .send({ message: "user not found please register!", success: false });
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
@@ -52,7 +52,7 @@ export const loginController = async (req, res) => {
     res.status(200).send({ message: "Login Success", success: true, token });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: `Error in Login CTRL ${error.message}` });
+    res.status(500).send({ message: `Error in Login Controller ${error.message}` });
   }
 };
 
@@ -62,7 +62,7 @@ export const authController = async (req, res) => {
     user.password = undefined
     if (!user) {
       return res.status(200).send({
-        message: "user not found",
+        message: "user not found please register!",
         success: false,
       });
     } else {
@@ -74,7 +74,7 @@ export const authController = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: "auth error",
+      message: "authorization error",
       success: false,
       error,
     });

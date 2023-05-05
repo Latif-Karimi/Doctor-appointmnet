@@ -3,6 +3,7 @@ import { Layout } from "../../components/Layout";
 import axios from "axios";
 import moment from "moment";
 import { Table, message } from "antd";
+import '../../styles/table.css';
 
 export const DoctorAppointment = () => {
   const [appointments, setAppointments] = useState();
@@ -51,7 +52,7 @@ export const DoctorAppointment = () => {
       title: "ID",
       dataIndex: "_id",
     },
-  {
+    {
       title: "Date & Time",
       dataIndex: "date",
       render: (text, record) => (
@@ -72,7 +73,7 @@ export const DoctorAppointment = () => {
         <div className="d-flex">
           {record.status === "pending" && (
             <div className="d-flex">
-              <button  
+              <button
                 className="btn btn-success ms-2 "
                 onClick={() => hadnleStatus(record, "approved")}
               >
@@ -92,8 +93,10 @@ export const DoctorAppointment = () => {
   ];
   return (
     <Layout>
-      <h1>Appointments Lists</h1>
-      <Table columns={columns} dataSource={appointments} />
+      <h1 className="text-center">Appointments Lists</h1>
+      <div className="my-table p-4">
+        <Table columns={columns} dataSource={appointments}rowKey="_id" />
+      </div>
     </Layout>
   );
 };

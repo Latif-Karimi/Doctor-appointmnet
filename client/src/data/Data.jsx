@@ -14,11 +14,7 @@ export const userMenu = [
     path: "/apply-doctor",
     icon: "fa-solid fa-user-doctor fa-beat",
   },
-  {
-    name: "Profile",
-    path: "/profile",
-    icon: "fa-sharp fa-solid fa-user-tie fa-beat",
-  },
+  
 ];
 //Admin
 export const adminMenu = [
@@ -37,9 +33,5 @@ export const adminMenu = [
     path: "/admin/users",
     icon: "fa-solid fa-users fa-beat",
   },
-  {
-    name: "Profile",
-    path: "/profile",
-    icon: "fa-solid fa-users fa-beat",
-  },
+  
 ];

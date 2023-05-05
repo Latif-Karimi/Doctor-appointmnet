@@ -3,6 +3,7 @@ import { Layout } from "../components/Layout";
 import axios from "axios";
 import moment from 'moment'
 import { Table } from "antd";
+import '../styles/table.css';
 
 export const Appointments = () => {
   const [appointments, setAppointments] = useState();
@@ -30,24 +31,6 @@ export const Appointments = () => {
         title: 'ID',
         dataIndex: '_id',
     },
-    // {
-    //     title: 'Name',
-    //     dataIndex: 'name',
-    //     render: (text,record)=>(
-    //         <span>
-    //             {record.doctorId.firstName} {record.doctorId.lastName}
-    //         </span>
-    //     )
-    // },
-    // {
-    //    title:'Phone',
-    //    dataIndex: 'phone',
-    //    render: (text,record)=>(
-    //     <span>
-    //         {record.doctorId.phone}
-    //     </span>
-    //    ),
-    // },
     {
         title:'Date & Time',
         dataIndex: 'date',
@@ -65,6 +48,9 @@ export const Appointments = () => {
   ];
   return <Layout>
     <h1>Appointments Lists</h1>
-    <Table columns={columns} dataSource={appointments}/>
+    <div className="my-table p-4">
+      <Table columns={columns} dataSource={appointments}rowKey="_id"/>
+    </div>
+    
   </Layout>;
 };

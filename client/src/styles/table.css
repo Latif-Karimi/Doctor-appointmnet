@@ -1,0 +1,19 @@
+.my-table {
+    border: 1px solid #ccc;
+  }
+  
+  
+  .my-table th{
+    border: 1px solid #ccc;
+    background-color: rgb(113, 109, 109) !important;
+    color: white !important;
+    font-size: larger;
+    padding: 10px;
+    
+  }
+  .my-table td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    
+  }
+  

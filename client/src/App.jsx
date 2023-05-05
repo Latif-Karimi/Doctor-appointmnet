@@ -15,6 +15,7 @@ import { Booking } from "./pages/Booking";
 import { Appointments } from "./pages/Appointments";
 import { DoctorAppointment } from "./pages/doctor/DoctorAppointment";
 
+
 export const App = () => {
   const { loading } = useSelector((state) => state.alerts);
   return (
@@ -80,6 +81,8 @@ export const App = () => {
                 </ProtectedRoute>
               }
             />
+            
+           
             <Route
               path="/login"
               element={
@@ -96,6 +99,7 @@ export const App = () => {
                 </PublicRoute>
               }
             />
+            
              <Route
               path="/appointments"
               element={

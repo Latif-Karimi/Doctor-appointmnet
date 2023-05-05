@@ -1,4 +1,5 @@
 import doctorModel from '../models/doctorModel.js'
+
 import userModlel from '../models/userModel.js'
 
 //get all Users
@@ -69,3 +70,46 @@ export const changeAccountStatusController = async (req, res) => {
 
     }
 }
+//delete user account 
+// export const deleteUserAccountController = async (req,res)=>{
+//     try {
+//         const { doctorId, userId } = req.body
+
+//         const doctor = await doctorModel.findByIdAndDelete(doctorId)
+//         const user = await userModlel.findByIdAndDelete({userId })
+//         res.status(200).send({
+//             success: true,
+//             message: 'Account deleted successfully',
+//             data: doctor,
+//         })
+        
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).send({
+//             success:false,
+//             message:'Error in deleting user Aaccount',
+//             error
+//         })
+        
+//     }
+// }
+export const deleteUserAccountController = async (req, res) => {
+    try {
+        const user = await userModlel.findByIdAndDelete(req.params.userId);
+        res.status(200).send({
+            success:true,
+            message:"User deleted succcessfully",
+            data:user
+        })
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message: "Error on deleting user",
+            error
+        })
+      }
+    }
+    
+  
+  

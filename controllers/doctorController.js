@@ -26,8 +26,7 @@ export const getDocterController = async (req, res) => {
 //update profile
 export const updatProfileController = async (req, res) => {
     try {
-        const doctor = await doctorModel.findByIdAndUpdate({ userId: req.body.userId },
-            req.body);
+        const doctor = await doctorModel.findOneAndUpdate({ userId: req.body.userId }, req.body, { new: true });
         res.status(201).send({
             success: true,
             message: 'Doctor profile updated successfully',
@@ -37,12 +36,13 @@ export const updatProfileController = async (req, res) => {
         console.log(error)
         res.status(500).send({
             success: false,
-            message: "Docter Profile Update Error",
+            message: "Doctor Profile Update Error",
             error
         })
-
     }
 }
+
+
 //get doctor by id 
 export const getDoctorByIdController = async (req, res) => {
     try {
@@ -83,11 +83,11 @@ export const doctorAppointmentController = async (req, res) => {
     }
 }
 //update appointment status
-export const udateStatusController = async (req,res)=>{
+export const udateStatusController = async (req, res) => {
     try {
-        const {appointmentsId,status} = req.body
-        const appointments = await appointmentModel.findByIdAndUpdate(appointmentsId,{status})
-        const user = await userModel.findOne({_id: appointments.userId})
+        const { appointmentsId, status } = req.body
+        const appointments = await appointmentModel.findByIdAndUpdate(appointmentsId, { status })
+        const user = await userModel.findOne({ _id: appointments.userId })
         const notification = user.notification;
         notification.push({
             type: "status-updated",
@@ -96,17 +96,17 @@ export const udateStatusController = async (req,res)=>{
         })
         await user.save()
         res.status(200).send({
-            success:true,
+            success: true,
             message: 'Appointment status updated',
-            
+
         })
     } catch (error) {
         console.log(error)
         res.status(500).send({
-            success:false,
-            message:'Error on update appointment Status',
+            success: false,
+            message: 'Error on update appointment Status',
             error
         })
-        
+
     }
 }

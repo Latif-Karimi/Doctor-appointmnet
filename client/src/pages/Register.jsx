@@ -1,10 +1,12 @@
 import React from "react";
 import '../styles/Register.css'
+import {Header} from '../components/Header'
 import { Form, Input, message } from "antd";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch} from 'react-redux'
 import {showLoading,hideLoading} from '../redux/features/alertSlice'
+import { Footer } from "../components/Footer";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -21,6 +23,8 @@ export const Register = () => {
         navigate("/login");
       } else {
         message.error(response.data.message);
+        //incase if the user is already exist
+        navigate('/login')
       }
     } catch (error) {
       dispatch(hideLoading())
@@ -30,6 +34,7 @@ export const Register = () => {
   };
   return (
     <>
+    <Header/>
     <div className='form-container'>
       <Form layout='vertical' onFinish={onfinishHandler} className='register-form card p-4'>
         <h3 className='text-center'>Register Form</h3>
@@ -45,7 +50,9 @@ export const Register = () => {
         <button className='btn btn-primary' type='submit'>Register</button>
         <Link to='/login'className='mt-2 text-center'>Already User click to login</Link>
       </Form>
+     
     </div>
+    <Footer/>
     </>
   );
 };

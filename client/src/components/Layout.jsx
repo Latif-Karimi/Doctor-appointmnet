@@ -4,6 +4,8 @@ import { adminMenu, userMenu } from "../data/Data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge, message } from "antd";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -43,6 +45,7 @@ export const Layout = ({ children }) => {
 
   return (
     <>
+    <Header/>
       <div className="main">
         <div className="layout">
           <div className="sidebar">
@@ -50,7 +53,7 @@ export const Layout = ({ children }) => {
               <h6>Doctor Appointment</h6>
             </div>
             <hr />
-            <div className="menu">
+            <div className="menu" >
               {sidebarMenu.map((menu, index) => {
                 const isActive = location.pathname === menu.path;
                 return (
@@ -72,14 +75,15 @@ export const Layout = ({ children }) => {
           </div>
           <div className="content">
             <div className="header">
-              <div className="header-content" style={{ cursor: "pointer" }}>
-                <Badge
+        
+              <div className="header-content " style={{ cursor: "pointer" }}>
+                <Badge className="m-2 badge"
                   count={user?.notification.length}
                   onClick={() => navigate("/notification")}
                 >
                   <i className="fa-solid fa-bell fa-beat"></i>
                 </Badge>
-
+                  
                 <Link to="/profile">{user?.name}</Link>
               </div>
             </div>
@@ -87,6 +91,7 @@ export const Layout = ({ children }) => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

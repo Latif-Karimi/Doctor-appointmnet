@@ -6,26 +6,26 @@ const doctorSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
-        require: [true, 'first name is required']
+        required: [true, 'first name is required']
     },
     lastName: {
         type: String,
-        require: [true, 'last name is required']
+        required: [true, 'last name is required']
     },
     phone: {
         type: String,
-        require: [true, 'phone number is required']
+        required: [true, 'phone number is required']
     },
     email: {
         type: String,
-        require: [true, 'eamil is required']
+        required: [true, 'eamil is required']
     },
     website: {
         type: String,
     },
     address: {
         type: String,
-        require: [true, 'address is required']
+        required: [true, 'address is required']
     },
     specailization: {
         type: String,

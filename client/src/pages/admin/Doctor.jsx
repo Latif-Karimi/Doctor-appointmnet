@@ -15,12 +15,17 @@ export const Doctor = () => {
         },
       });
       if (response.data.success) {
-        setDoctors(response.data.data);
+        const updatedDoctors = response.data.data.map((doctor) => ({
+          ...doctor,
+          key: doctor._id,
+        }));
+        setDoctors(updatedDoctors);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  
   //handle account status
   const handleAccountStatus = async (record, status) => {
     try {
@@ -39,18 +44,24 @@ export const Doctor = () => {
       );
       if (response.data.success) {
         message.success(response.data.message);
-        // window.location.reload();
+        // Update status in doctors array
+        setDoctors((prevDoctors) =>
+          prevDoctors.map((doctor) =>
+            doctor._id === record._id ? { ...doctor, status,key:doctor._id } : doctor
+          )
+        );
       }
     } catch (error) {
       message.error("Error in handler Account Status");
     }
   };
+
   useEffect(() => {
     getDoctors();
   }, []);
 
   //antD table
-  const colums = [
+  const columns = [
     {
       title: "Name",
       dataIndex: "name",
@@ -76,12 +87,17 @@ export const Doctor = () => {
           {record.status === "pending" ? (
             <button
               className="btn btn-success"
-              onClick={handleAccountStatus(record, "approved")}
+              onClick={() => handleAccountStatus(record, "approved")}
             >
               Approve
             </button>
           ) : (
-            <button className="btn btn-danger">Reject</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => handleAccountStatus(record, "rejected")}
+            >
+              Reject
+            </button>
           )}
         </div>
       ),
@@ -90,8 +106,11 @@ export const Doctor = () => {
 
   return (
     <Layout>
-      <h1 className="text-center">Docters</h1>
-      <Table columns={colums} dataSource={doctors} />
+      <h1 className="text-center p-3">Doctors List</h1>
+      <div className="my-table">
+      <Table columns={columns} dataSource={doctors} rowKey="key" />
+
+      </div>
     </Layout>
   );
 };
