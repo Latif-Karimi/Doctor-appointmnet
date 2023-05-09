@@ -1,6 +1,6 @@
 import express from "express";
 import { authMiddleware } from '../middlewares/authMiddleware.js'
-import {doctorAppointmentController, getDocterController, getDoctorByIdController, udateStatusController, updatProfileController} from '../controllers/doctorController.js'
+import {deleteAppointmentController, doctorAppointmentController, getDocterController, getDoctorByIdController, udateStatusController, updatProfileController} from '../controllers/doctorController.js'
 
 //router onject
 const router = express.Router();
@@ -15,4 +15,6 @@ router.post('/get-doctor-byId', authMiddleware, getDoctorByIdController)
 router.get('/doctor-aapointments' , authMiddleware, doctorAppointmentController)
 //update appointment status
 router.post('/update-status',authMiddleware,udateStatusController)
+//delet appointment
+router.delete('/delete-appointment/:_Id',authMiddleware, deleteAppointmentController)
 export default router;

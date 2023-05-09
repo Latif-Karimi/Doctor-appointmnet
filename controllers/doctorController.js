@@ -66,7 +66,17 @@ export const getDoctorByIdController = async (req, res) => {
 export const doctorAppointmentController = async (req, res) => {
     try {
         const doctor = await doctorModel.findOne({ userId: req.body.userId })
+        console.log('doctor:', doctor)
+
+
+        if (!doctor) {
+            return res.status(404).send({
+                success: false,
+                message: 'Doctor not found',
+            })
+        }
         const appointments = await appointmentModel.find({ doctorId: doctor._id })
+        console.log('doctor._id:', doctor._id)
         res.status(200).send({
             success: true,
             message: 'Doctor appointment fetched successfully',
@@ -76,12 +86,12 @@ export const doctorAppointmentController = async (req, res) => {
         console.log(error)
         res.status(500).send({
             success: false,
-            message: "Error in geting doctor appointments",
+            message: 'Error in getting doctor appointments',
             error
         })
-
     }
 }
+
 //update appointment status
 export const udateStatusController = async (req, res) => {
     try {
@@ -91,7 +101,7 @@ export const udateStatusController = async (req, res) => {
         const notification = user.notification;
         notification.push({
             type: "status-updated",
-            message: `Your appointment has been updated ${status}`,
+            message: `Your appointment has been updated, ${status}`,
             onclickPath: "/doctor-appointments",
         })
         await user.save()
@@ -105,6 +115,25 @@ export const udateStatusController = async (req, res) => {
         res.status(500).send({
             success: false,
             message: 'Error on update appointment Status',
+            error
+        })
+
+    }
+}
+//delete appointment
+export const deleteAppointmentController = async (req, res) => {
+    try {
+        const user = await appointmentModel.findByIdAndDelete(req.params._Id)
+        res.status(200).send({
+            success: true,
+            message: 'User appointment delete successfully',
+            data: user
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: 'Error in deleting appointment',
             error
         })
 

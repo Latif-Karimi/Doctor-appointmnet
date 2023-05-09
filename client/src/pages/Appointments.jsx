@@ -28,7 +28,7 @@ export const Appointments = () => {
   }, []);
   const columns = [
     {
-        title: 'ID',
+        title: 'Your appointment confirmation number',
         dataIndex: '_id',
     },
     {
@@ -47,7 +47,9 @@ export const Appointments = () => {
      },
   ];
   return <Layout>
-    <h1>Appointments Lists</h1>
+    <h1 className="text-center p-2">Appointments List</h1>
+    <p className="text-center ">Note: Only the doctor is authorized to clear the appointments list's history.</p>
+
     <div className="my-table p-4">
       <Table columns={columns} dataSource={appointments}rowKey="_id"/>
     </div>

@@ -107,8 +107,7 @@ export const Booking = () => {
             </h3>
             <h5>Fees : {doctors.fessPerConsultation}</h5>
             <h5>
-              Timings : {doctors.timings && doctors.timings[0]}-{" "}
-              {doctors.timings && doctors.timings[1]}{" "}
+              Timings : {doctors.timings}
             </h5>
             <div className="d-flex flex-column w-50">
               <DatePicker

@@ -65,8 +65,8 @@ export const Notification = () => {
   return (
     <Layout>
       <h3 className="p-3 text-center">Notification Page</h3>
-      <Tabs className="m-3">
-        <div tab="Unread" key={0}>
+      <Tabs className="m-3" defaultActiveKey="0" key="notification-tabs">
+        <div tab="Unread" key="unread">
           <div className="d-flex justify-content-end m-4">
             <h5
               className="p-d text-danger"
@@ -77,17 +77,19 @@ export const Notification = () => {
             </h5>
           </div>
           {user?.notification.map((notificationMsg) => (
-            <div className="card m-3 p-3" key={notificationMsg._id}>
-              <div
-                className="card-text"
-                onClick={() => navigate(notificationMsg.noClickPath)}
-              >
-                {notificationMsg.message}
+            <div key={notificationMsg._id}>
+              <div className="card m-3 p-3">
+                <div
+                  className="card-text"
+                  onClick={() => navigate(notificationMsg.noClickPath)}
+                >
+                  {notificationMsg.message}
+                </div>
               </div>
             </div>
           ))}
         </div>
-        <div tab="Read" key={1}>
+        <dive tab="Read" key="read">
           <div className="d-flex justify-content-end m-4">
             <h5
               className="text-danger"
@@ -98,16 +100,17 @@ export const Notification = () => {
             </h5>
           </div>
           {user?.seennotification.map((notificationMsg) => (
-            <div
-              className="card m-3 p-3 " key={notificationMsg._id}
-              onClick={notificationMsg.onClickPath}
-              style={{ cursor: "pointer" }}
-              
-            >
-              <div className="card-text">{notificationMsg.message}</div>
+            <div key={notificationMsg._id}>
+              <div
+                className="card m-3 p-3 "
+                onClick={notificationMsg.onClickPath}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="card-text">{notificationMsg.message}</div>
+              </div>
             </div>
           ))}
-        </div>
+        </dive>
       </Tabs>
     </Layout>
   );

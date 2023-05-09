@@ -18,7 +18,7 @@ const doctorSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, 'eamil is required']
+        required: [true, 'email is required']
     },
     website: {
         type: String,
@@ -44,7 +44,7 @@ const doctorSchema = new mongoose.Schema({
         default: 'pending',
     },
     timings: {
-        type: Object,
+        type: String,
         required: [true, 'work schecual is required']
     },
 }, { timestamps: true })

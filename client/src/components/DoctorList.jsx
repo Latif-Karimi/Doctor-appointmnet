@@ -18,13 +18,13 @@ export const DoctorList = ({ doctor }) => {
             <b>Specailization</b> {doctor.specailization}
           </p>
           <p>
-            <b>Experience</b> {doctor.experience}
+            <b>Experience</b> {doctor.experience} years
           </p>
           <p>
-            <b>Fess Per Consultation</b> {doctor.fessPerConsultation}
+            <b>Fess Per Consultation</b> ${doctor.fessPerConsultation}
           </p>
           <p>
-            <b>Timings</b> {doctor.timings[0]} - {doctor.timings[1]}
+            <b>Timings</b> {doctor.timings} 
           </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ export const HomePage = () => {
   }, []);
   return (
     <Layout>
-      <h4
+      <h6
         className="p-3 "
         style={{ backgroundColor: "gray", color: "white", borderRadius: "5px" }}
       >
@@ -38,7 +38,7 @@ export const HomePage = () => {
         You can select a doctor card to schedule an appointment. Simply click on
         the card of your desired doctor, and you'll be redirected to a page
         where you can choose a date and time for your appointment.{" "}
-      </h4>
+      </h6>
       <Row>
         {doctors &&
           doctors.map((doctor) => (

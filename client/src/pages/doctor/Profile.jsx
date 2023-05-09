@@ -23,10 +23,10 @@ export const Profile = () => {
         {
           ...values,
           userId: user._id,
-          timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
-          ],
+          // timings: [
+          //   moment(values.timings[0]).format("HH:mm"),
+          //   moment(values.timings[1]).format("HH:mm"),
+          // ],
         },
 
         {
@@ -82,10 +82,6 @@ export const Profile = () => {
           className="m-3"
           initialValues={{
             ...doctor,
-            timings: [
-              moment(doctor.timings[0], "HH:mm"),
-              moment(doctor.timings[1], "HH:mm"),
-            ],
           }}
         >
           <h3 className="">Personel Details</h3>
@@ -179,10 +175,16 @@ export const Profile = () => {
               </Form.Item>
             </Col>
             <Col xs={24} md={24} lg={8}>
-              <Form.Item label="Timings" name="timings" required>
-                <TimePicker.RangePicker format="HH:mm" />
+              <Form.Item
+                label="Working Schedual"
+                name="timings"
+                required
+                rules={[{ required: true }]}
+              >
+                <Input type="text" placeholder="Your Fess Per Consultation" />
               </Form.Item>
             </Col>
+            
             <Col xs={24} md={24} lg={8}></Col>
             <Col xs={24} md={24} lg={8}>
               <button className="btn btn-primary form-btn" type="submit">

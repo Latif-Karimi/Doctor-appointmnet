@@ -18,14 +18,19 @@ export const DoctorAppointment = () => {
       });
       if (response.data.success) {
         setAppointments(response.data.data);
+      } else {
+        message.error(response.data.message);
       }
     } catch (error) {
       console.log(error);
+      message.error("Error in getting appointments");
     }
   };
+  
   useEffect(() => {
     getAppointments();
   }, []);
+  // statuse
   const hadnleStatus = async (record, status) => {
     try {
       const response = await axios.post(
@@ -46,10 +51,27 @@ export const DoctorAppointment = () => {
       message.error("Error in handle statuse");
     }
   };
+//delete
+const handleDelete = async (_id) => {
+  try {
+    const response = await axios.delete(`/api/doctor/delete-appointment/${_id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.data.success) {
+      message.success(response.data.message);
+      getAppointments();
+    }
+  } catch (error) {
+    console.log(error);
+    message.error("Error in deleting appointment");
+  }
+};
 
   const columns = [
     {
-      title: "ID",
+      title: "Patient confirmation number",
       dataIndex: "_id",
     },
     {
@@ -74,27 +96,37 @@ export const DoctorAppointment = () => {
           {record.status === "pending" && (
             <div className="d-flex">
               <button
-                className="btn btn-success ms-2 "
-                onClick={() => hadnleStatus(record, "approved")}
+                className="btn btn-success ms-2"
+                onClick={() => hadnleStatus(record, "Approved")}
               >
                 Approved
               </button>
               <button
-                className="btn btn-danger ms-2"
+                className="btn btn-warning ms-2"
                 onClick={() => hadnleStatus(record, "rejected")}
               >
                 Reject
               </button>
             </div>
           )}
+          {(record.status === "Approved" || record.status === "rejected") && (
+            <button
+              className="btn btn-danger ms-2"
+              onClick={() => handleDelete(record._id)}
+            >
+              Delete
+            </button>
+          )}
         </div>
       ),
+      
     },
   ];
+  
   return (
     <Layout>
-      <h1 className="text-center">Appointments Lists</h1>
-      <div className="my-table p-4">
+      <h1 className="text-center p-4">Appointments List</h1>
+      <div className="my-table ">
         <Table columns={columns} dataSource={appointments}rowKey="_id" />
       </div>
     </Layout>

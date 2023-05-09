@@ -1,11 +1,11 @@
 import React from "react";
 import { Layout } from "../components/Layout";
-import { Form, Col, Row, Input,TimePicker,message } from "antd";
+import { Form, Col, Row, Input,message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import moment from "moment";
+// import moment from "moment";
 
 export const ApplyDoctor = () => {
     const { user } = useSelector((state) => state.user);
@@ -17,11 +17,9 @@ export const ApplyDoctor = () => {
       dispatch(showLoading());
       const response = await axios.post(
         "/api/user/apply-doctor",
-        { ...values, userId: user._id, timings: [
-          moment(values.timings[0]).format("HH:mm"),
-          moment(values.timings[1]).format("HH:mm"),
-        ], },
+        { userId: user._id,...values},
         {
+          
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -42,7 +40,7 @@ export const ApplyDoctor = () => {
   };
   return (
     <Layout>
-      <h1 className="text-center">Apply Docter</h1>
+      <h1 className="text-center p-3">Apply Docter</h1>
       <Form layout="vertical" onFinish={handleFinish} className="m-3">
         <h3 className="">Personel Details</h3>
         <Row gutter={20}>
@@ -106,7 +104,7 @@ export const ApplyDoctor = () => {
         <Row gutter={20}>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Specailization"
+              label="Specialization"
               name="specailization"
               required
               rules={[{ required: true }]}
@@ -139,8 +137,9 @@ export const ApplyDoctor = () => {
               label="Timings"
               name="timings" 
               required
+              rules={[{ required: true }]}
             >
-              <TimePicker.RangePicker format="HH:mm"/>
+               <Input type="text" placeholder="Your Working Schedual" />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
